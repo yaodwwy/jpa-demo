@@ -26,7 +26,7 @@ public class TeacherRepoTest {
     TeacherRepo teacherRepo;
 
     @Test
-    public void testClassRepo() {
+    public void testStudentRepo() {
         log.debug("查出所有老师信息包含学校、班级信息");
         log.debug("-------------------------------");
         long start = System.currentTimeMillis();
@@ -39,7 +39,7 @@ public class TeacherRepoTest {
     }
 
     @Test
-    public void testClassRepoBySpecFactory() {
+    public void testStudentRepoBySpecFactory() {
         log.debug("查出所有老师信息包含学校、班级信息, 工厂优化版");
         log.debug("-------------------------------");
 

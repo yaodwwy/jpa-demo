@@ -25,18 +25,18 @@ import java.util.UUID;
 public class StudentRepoTest {
     @Autowired StudentRepo studentRepo;
     @Test
-    public void testClassRepo() {
+    public void testStudentRepo() {
         log.debug("查出所有学生信息包含学校、班级、老师、学生信息");
         log.debug("-------------------------------");
         long start = System.currentTimeMillis();
-        studentRepo.findAll(PageRequest.of(1, 20)).forEach(student -> {
+        studentRepo.findAll(PageRequest.of(1, 80)).forEach(student -> {
             log.debug(student.getSchool().getName() + " : " + student.getAClass().getName() + " : " + student.getName());
         });
         log.debug("---------------" + (System.currentTimeMillis() - start) + " 毫秒" + "----------------");
     }
 
     @Test
-    public void testClassRepoBySpecFactory() {
+    public void testStudentRepoBySpecFactory() {
         log.debug("查出所有学生信息包含学校、班级、老师、学生信息, 工厂优化版");
         log.debug("-------------------------------");
 
@@ -45,7 +45,7 @@ public class StudentRepoTest {
         };
 
         long start = System.currentTimeMillis();
-        studentRepo.findAll(specification,PageRequest.of(1, 20)).forEach(student -> {
+        studentRepo.findAll(specification,PageRequest.of(1, 80)).forEach(student -> {
             log.debug(student.getSchool().getName() + " : " + student.getAClass().getName() + " : " + student.getName());
         });
         log.warn(System.currentTimeMillis() - start + "毫秒");

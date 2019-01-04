@@ -50,32 +50,16 @@ public class SchoolRepoTest {
 
     @Test
     public void testSchoolRepoIncludeClass() {
-        log.debug("查出所有学校的信息包含班级");
+        log.debug("查出所有学校的信息包含班级、学生");
         log.debug("-------------------------------");
         long start = System.currentTimeMillis();
         schoolRepo.findAll().forEach(school -> {
             school.getClasses().forEach(aClass -> {
                 log.debug(school.getName() + " : " + aClass.getName());
             });
-        });
-        log.warn(System.currentTimeMillis() - start + "毫秒");
-        log.debug("-------------------------------");
-    }
-
-    @Test
-    public void testSchoolRepoIncludeClassAndStudents() {
-        log.debug("查出所有学校的信息包含班级和学生");
-        log.debug("-------------------------------");
-        long start = System.currentTimeMillis();
-        schoolRepo.findAll(PageRequest.of(1, 20)).forEach(school -> {
-            school.getClasses().forEach(aClass -> {
-                log.debug(school.getName() + " : " + aClass.getName());
-            });
-
             school.getStudents().forEach(student -> {
-                log.debug(school.getName() + " : " + student.getAClass().getName() + " : " + student.getName());
+                log.debug(school.getName() + " : " + student.getName());
             });
-
         });
         log.warn(System.currentTimeMillis() - start + "毫秒");
         log.debug("-------------------------------");
@@ -92,13 +76,13 @@ public class SchoolRepoTest {
         };
 
         long start = System.currentTimeMillis();
-        schoolRepo.findAll(specification).forEach(school -> {
+        schoolRepo.findAll(specification,PageRequest.of(1,20)).forEach(school -> {
             school.getClasses().forEach(aClass -> {
                 log.debug(school.getName() + " : " + aClass.getName());
             });
 
             school.getStudents().forEach(student -> {
-                log.debug(school.getName() + " : " + student.getAClass().getName() + " : " + student.getName());
+                log.debug(school.getName() + " : " + student.getName());
             });
 
         });
