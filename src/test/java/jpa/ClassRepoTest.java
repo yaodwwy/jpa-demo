@@ -50,8 +50,8 @@ public class ClassRepoTest {
         log.debug("-------------------------------");
 
         Specification<Class> specification = (Specification<Class>) (root, query, criteriaBuilder) -> {
-            root.joinSet("teachers");
-            root.joinSet("students");
+            root.fetch("teachers");
+            root.fetch("students");
             return PredicateFactory.getClassPredicate(root, null, query, criteriaBuilder, null);
         };
 

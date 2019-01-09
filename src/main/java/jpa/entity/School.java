@@ -9,12 +9,16 @@ import java.util.UUID;
 /**
  * @author yaodw
  */
-@Entity
 @Data
+@Entity
 @EqualsAndHashCode(exclude = {"classes", "students"})
 @ToString(exclude = {"classes", "students"})
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(name = "school.classes",
+        attributeNodes = @NamedAttributeNode("classes"))
+@NamedEntityGraph(name = "school.students",
+        attributeNodes = @NamedAttributeNode("students"))
 public class School {
 
     @Id

@@ -43,9 +43,9 @@ public class TeacherRepoTest {
         log.debug("查出所有老师信息包含学校、班级信息, 工厂优化版");
         log.debug("-------------------------------");
 
-        Specification<Teacher> specification = (Specification<Teacher>) (root, query, criteriaBuilder) -> {
-            root.joinSet("classes");
-            return PredicateFactory.getTeacherPredicate(root, null, query, criteriaBuilder, null);
+        Specification<Teacher> specification = (Specification<Teacher>) (root, query, cb) -> {
+            root.fetch("classes");
+            return PredicateFactory.getTeacherPredicate(root, null, query, cb, null);
         };
 
         long start = System.currentTimeMillis();
