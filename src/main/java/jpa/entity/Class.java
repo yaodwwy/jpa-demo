@@ -5,6 +5,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -14,8 +15,8 @@ import java.util.UUID;
  */
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"teachers","students"})
-@ToString(exclude = {"teachers","students"})
+@EqualsAndHashCode(exclude = {"teachers","students","teachersSize","studentsSize"})
+@ToString(exclude = {"id","teachers","students"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Class {
@@ -31,15 +32,23 @@ public class Class {
     @JoinTable(name = "class_teacher",
             joinColumns = {@JoinColumn(name = "class_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")})
-    private Set<Teacher> teachers;
+    private Set<Teacher> teachers = new HashSet<>();
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "aClass")
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
 
     public Class(String name, School school, Set<Teacher> teachers, Set<Student> students) {
         this.name = name;
         this.school = school;
         this.teachers = teachers;
         this.students = students;
+    }
+
+    public int getTeachersSize() {
+        return getTeachers().size();
+    }
+
+    public int getStudentsSize() {
+        return getTeachers().size();
     }
 }
 

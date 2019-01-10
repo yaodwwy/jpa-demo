@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
-@ToString(exclude = {"classes", "students"})
+@ToString(exclude = {"id","classes", "students"})
 @Table(name = "teacher")
 @NoArgsConstructor
 public class Teacher {
@@ -29,7 +30,7 @@ public class Teacher {
     @JoinTable(name = "class_teacher",
             joinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "class_id", referencedColumnName = "id")})
-    private Set<Class> classes;
+    private Set<Class> classes = new HashSet<>();
 
     public Teacher(String name, School school) {
         this.name = name;

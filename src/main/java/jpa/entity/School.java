@@ -3,6 +3,7 @@ package jpa.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,12 +13,12 @@ import java.util.UUID;
 @Data
 @Entity
 @EqualsAndHashCode(exclude = {"classes", "students"})
-@ToString(exclude = {"classes", "students"})
+@ToString(exclude = {"id","classes", "students"})
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedEntityGraph(name = "school.classes",
+@NamedEntityGraph(name = "School.classes",
         attributeNodes = @NamedAttributeNode("classes"))
-@NamedEntityGraph(name = "school.students",
+@NamedEntityGraph(name = "School.students",
         attributeNodes = @NamedAttributeNode("students"))
 public class School {
 
@@ -26,8 +27,15 @@ public class School {
     private UUID id;
     private String name;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "school")
-    private Set<Class> classes;
+    private Set<Class> classes = new HashSet<>();
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "school")
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
+
+    public int classesSize() {
+        return getClasses().size();
+    }
+    public int studentsSize() {
+        return getStudents().size();
+    }
 }
 

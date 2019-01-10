@@ -45,9 +45,7 @@ public class StudentRepoTest {
         };
 
         long start = System.currentTimeMillis();
-        studentRepo.findAll(specification,PageRequest.of(1, 80)).forEach(student -> {
-            log.debug(student.getSchool().getName() + " : " + student.getAClass().getName() + " : " + student.getName());
-        });
+        studentRepo.findAll(specification,PageRequest.of(1, 80)).forEach(System.out::println);
         log.warn(System.currentTimeMillis() - start + "毫秒");
 
         log.debug("-------------------------------");

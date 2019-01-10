@@ -33,7 +33,7 @@ public class Application {
 
             //初始化10个学校
             Set<School> schools = new HashSet<>();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 20; i++) {
                 School school = new School();
                 //初始化10个班每校
                 Set<Class> classes = new HashSet<>();
@@ -41,13 +41,13 @@ public class Application {
                     Class aClass = new Class();
                     //初始化10个老师每班
                     Set<Teacher> teachers = new HashSet<>();
-                    for (int t = 0; t < 10; t++) {
+                    for (int t = 0; t < 5; t++) {
                         Teacher teacher = new Teacher("第" + i + j + t + "号老师", school);
                         teachers.add(teacher);
                     }
                     //初始化10个学生每班
                     Set<Student> students = new HashSet<>();
-                    for (int s = 0; s < 10; s++) {
+                    for (int s = 0; s < 1; s++) {
                         Student student = new Student("第" + i + j + s + "名学生", aClass, school);
                         students.add(student);
                     }

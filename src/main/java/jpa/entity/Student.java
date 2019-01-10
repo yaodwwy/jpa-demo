@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"teachers"})
+@ToString(exclude = {"id"})
 public class Student {
     @Id
     @GeneratedValue

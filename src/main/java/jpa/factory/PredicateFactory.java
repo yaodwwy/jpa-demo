@@ -66,22 +66,22 @@ public class PredicateFactory {
                                                 Teacher teacher) {
         List<Predicate> predicates = new ArrayList<>();
 
-        Fetch<Teacher, School> fetchSchool = null;
+        Fetch<Teacher, School> sFetch = null;
 
         if (!Long.class.equals(query.getResultType())) {
             if (parent != null) {
-                fetchSchool = parent.fetch("school");
+                sFetch = parent.fetch("school");
             } else {
-                fetchSchool = root.fetch("school");
+                sFetch = root.fetch("school");
             }
         }
 
-        Join<Teacher, School> joinSchool = root.join("school");
+        Join<Teacher, School> sRoot = root.join("school");
 
         if (teacher == null) {
             teacher = new Teacher();
         }
-        predicates.add(getSchoolPredicate(joinSchool, fetchSchool, query, cb, teacher.getSchool()));
+        predicates.add(getSchoolPredicate(sRoot, sFetch, query, cb, teacher.getSchool()));
         predicates = getNameLike(predicates, cb, root, teacher.getName());
         return cb.and(predicates.toArray(new Predicate[predicates.size()]));
     }
