@@ -1,9 +1,6 @@
 package jpa.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,8 +13,9 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
-public class Student {
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"id"}, callSuper = true)
+public class Student extends BaseEntity {
     @Id
     @GeneratedValue
     private UUID id;

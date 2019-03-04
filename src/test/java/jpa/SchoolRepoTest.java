@@ -2,11 +2,13 @@ package jpa;
 
 import jpa.entity.School;
 import jpa.factory.PredicateFactory;
+import jpa.query.InitDataService;
 import jpa.repo.ClassRepo;
 import jpa.repo.SchoolRepo;
 import jpa.repo.StudentRepo;
 import jpa.repo.TeacherRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,13 @@ public class SchoolRepoTest {
     TeacherRepo teacherRepo;
     @Autowired
     StudentRepo studentRepo;
+    @Autowired
+    InitDataService initDataService;
 
+    @Before
+    public void setUp() throws Exception {
+        initDataService.init();
+    }
     @Test
     public void testSchoolRepo() {
         log.debug("查出所有学校的信息");
@@ -57,7 +65,7 @@ public class SchoolRepoTest {
         log.debug("查出所有学校的信息包含班级、学生");
         log.debug("-------------------------------");
         long start = System.currentTimeMillis();
-        schoolRepo.findAll(PageRequest.of(3, 2)).forEach(school -> {
+        schoolRepo.findAll(PageRequest.of(0, 10)).forEach(school -> {
             log.debug("{}", school);
             log.debug("studentsSize:" + school.studentsSize());
             log.debug("; classesSize" + school.classesSize());

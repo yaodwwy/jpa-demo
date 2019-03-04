@@ -1,6 +1,7 @@
 package jpa.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -14,10 +15,11 @@ import java.util.UUID;
  */
 @Data
 @Entity
-@ToString(exclude = {"id","classes", "students"})
-@Table(name = "teacher")
 @NoArgsConstructor
-public class Teacher {
+@Table(name = "teacher")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"id", "classes"}, callSuper = true)
+public class Teacher extends BaseEntity {
 
     @Id
     @GeneratedValue

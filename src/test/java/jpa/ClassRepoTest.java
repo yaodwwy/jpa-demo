@@ -5,11 +5,13 @@ import jpa.entity.School;
 import jpa.entity.Student;
 import jpa.entity.Teacher;
 import jpa.factory.PredicateFactory;
+import jpa.query.InitDataService;
 import jpa.repo.ClassRepo;
 import jpa.repo.SchoolRepo;
 import jpa.repo.StudentRepo;
 import jpa.repo.TeacherRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,13 @@ public class ClassRepoTest {
     StudentRepo studentRepo;
     @Autowired
     TeacherRepo teacherRepo;
+    @Autowired
+    InitDataService initDataService;
+
+    @Before
+    public void setUp() throws Exception {
+        initDataService.init();
+    }
 
     @Test
     public void testClassRepo() {

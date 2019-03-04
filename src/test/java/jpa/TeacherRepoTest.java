@@ -3,8 +3,10 @@ package jpa;
 import jpa.entity.Student;
 import jpa.entity.Teacher;
 import jpa.factory.PredicateFactory;
+import jpa.query.InitDataService;
 import jpa.repo.TeacherRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,13 @@ import javax.persistence.criteria.JoinType;
 public class TeacherRepoTest {
     @Autowired
     TeacherRepo teacherRepo;
+    @Autowired
+    InitDataService initDataService;
+
+    @Before
+    public void setUp() throws Exception {
+        initDataService.init();
+    }
 
     @Test
     public void testStudentRepo() {

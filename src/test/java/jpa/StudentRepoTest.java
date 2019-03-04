@@ -3,8 +3,10 @@ package jpa;
 import jpa.entity.Class;
 import jpa.entity.Student;
 import jpa.factory.PredicateFactory;
+import jpa.query.InitDataService;
 import jpa.repo.StudentRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,20 @@ import java.util.UUID;
 @DataJpaTest
 public class StudentRepoTest {
     @Autowired StudentRepo studentRepo;
+    @Autowired
+    InitDataService initDataService;
+
+    @Before
+    public void setUp() throws Exception {
+        initDataService.init();
+    }
+
     @Test
     public void testStudentRepo() {
         log.debug("查出所有学生信息包含学校、班级、老师、学生信息");
         log.debug("-------------------------------");
         long start = System.currentTimeMillis();
-        studentRepo.findAll(PageRequest.of(1, 80)).forEach(student -> {
+        studentRepo.findAll(PageRequest.of(1, 1)).forEach(student -> {
             log.debug(student.getSchool().getName() + " : " + student.getAClass().getName() + " : " + student.getName());
         });
         log.debug("---------------" + (System.currentTimeMillis() - start) + " 毫秒" + "----------------");
@@ -41,11 +51,13 @@ public class StudentRepoTest {
         log.debug("-------------------------------");
 
         Specification<Student> specification = (Specification<Student>) (root, query, criteriaBuilder) -> {
-            return PredicateFactory.getStudentPredicate(root, null, query, criteriaBuilder, null);
+            root.join("aClass");
+            root.join("school");
+            return null;
         };
 
         long start = System.currentTimeMillis();
-        studentRepo.findAll(specification,PageRequest.of(1, 80)).forEach(System.out::println);
+        studentRepo.findAll(specification,PageRequest.of(1, 1)).forEach(System.out::println);
         log.warn(System.currentTimeMillis() - start + "毫秒");
 
         log.debug("-------------------------------");

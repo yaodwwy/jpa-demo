@@ -12,15 +12,15 @@ import java.util.UUID;
  */
 @Data
 @Entity
-@EqualsAndHashCode(exclude = {"classes", "students"})
-@ToString(exclude = {"id","classes", "students"})
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"classes", "students"}, callSuper = true)
+@ToString(exclude = {"id","classes", "students"}, callSuper = true)
 @NamedEntityGraph(name = "School.classes",
         attributeNodes = @NamedAttributeNode("classes"))
 @NamedEntityGraph(name = "School.students",
         attributeNodes = @NamedAttributeNode("students"))
-public class School {
+public class School extends BaseEntity {
 
     @Id
     @GeneratedValue

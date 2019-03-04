@@ -13,13 +13,14 @@ import java.util.UUID;
 /**
  * @author yaodw
  */
-@Entity
 @Data
-@EqualsAndHashCode(exclude = {"teachers","students","teachersSize","studentsSize"})
-@ToString(exclude = {"id","teachers","students"})
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Class {
+@EqualsAndHashCode(callSuper = true, exclude = {"teachers", "students"})
+@ToString(exclude = {"id", "teachers", "students"}, callSuper = true)
+public class Class extends BaseEntity {
 
     @Id
     @GeneratedValue
