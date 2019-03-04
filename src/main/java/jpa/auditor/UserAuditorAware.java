@@ -15,4 +15,27 @@ public class UserAuditorAware implements AuditorAware<String> {
         //TODO: 根据实际情况取真实用户
         return Optional.of("admin");
     }
+
+
+    /**
+     * 从security中获取用户
+     */
+    /*@Override
+    public String getCurrentAuditor() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "nobody";
+        }
+        return authentication.getPrincipal();
+    }*/
+
+    /**
+     * 从请求中获取用户
+     */
+    /*@Override
+    public String getCurrentAuditor() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        return request.getHeader("X-USER-ID");
+    }*/
+
 }
